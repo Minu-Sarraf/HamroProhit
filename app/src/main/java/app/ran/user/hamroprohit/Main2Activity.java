@@ -22,12 +22,16 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.rey.material.widget.ProgressView;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
+import app.ran.user.hamroprohit.History_listview;
+import app.ran.user.hamroprohit.R;
+
 public class Main2Activity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
+        implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener, AppBarLayout.OnOffsetChangedListener {
     ProgressView progresView;
     private AppBarLayout appBarLayout;
 
@@ -57,16 +61,10 @@ public class Main2Activity extends AppCompatActivity
         fab.setOnClickListener(this);
         tx.setVisibility(View.GONE);
         //getimage();
-        checkinternet();
+        //checkinternet();
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+
+
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -77,7 +75,7 @@ public class Main2Activity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
     }
-    private void getimage() {
+   /* private void getimage() {
         Gson_parser.listener("refer_image", ApiUrl.url_image, null, this);
         Log.e("getimage", "getimage");
     }
@@ -106,21 +104,8 @@ public class Main2Activity extends AppCompatActivity
         th.start();
 
     }
+*/
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-
-            case R.id.fab:
-
-                Intent referform = new Intent(this, Refer_form.class);
-
-                startActivityForResult(referform, 2);
-                overridePendingTransition(R.anim.abc_slide_in_bottom, R.anim.abc_slide_out_top);
-                break;
-        }
-
-    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -262,5 +247,15 @@ public class Main2Activity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
+
+    }
+
+    @Override
+    public void onClick(View v) {
+
     }
 }

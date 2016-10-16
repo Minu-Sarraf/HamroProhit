@@ -1,17 +1,21 @@
 package app.ran.user.hamroprohit;
 
+import android.content.CursorLoader;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.design.widget.AppBarLayout;
+import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
-import java.util.ArrayList;
-
-import app.ran.user.hamroprohit.widget.ProgressView;
+import com.rey.material.widget.ProgressView;
+import com.squareup.okhttp.RequestBody;
 
 /**
  * Created by User on 10/16/2016.
@@ -26,7 +30,7 @@ public class History_listview extends Fragment implements UICallback {
     RecyclerView mRecyclerView;
     LinearLayoutManager mLayoutManager;
     private RecyclerView.Adapter mAdapter;
-    ArrayList<Datalist.DataBean.MsgBean> list = new ArrayList<>();
+    //ArrayList<Datalist.DataBean.MsgBean> list = new ArrayList<>();
     ProgressView progresView;
     SharedPreferences prefs;
     String name, phone;
@@ -73,7 +77,7 @@ public class History_listview extends Fragment implements UICallback {
         if (mSwipeRefreshLayout != null) {
             mSwipeRefreshLayout.setColorSchemeResources(
                     R.color.materialred,
-                    R.color.materialblue,
+                    R.color.com_facebook_blue,
                     R.color.materialyellow);
         }
 
@@ -90,7 +94,7 @@ public class History_listview extends Fragment implements UICallback {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        Gson_parser.listener("history", ApiUrl.referl_history, addpostdata(), this);
+     //   Gson_parser.listener("history", ApiUrl.referl_history, addpostdata(), this);
 
         trySwipeRefreshLayout();
     }
@@ -114,17 +118,14 @@ public class History_listview extends Fragment implements UICallback {
 
 
     public void run123() {
-        Gson_parser.listener("history", ApiUrl.referl_history, addpostdata(), this);
+      //  Gson_parser.listener("history", ApiUrl.referl_history, addpostdata(), this);
         flag = 1;
     }
 
 
-    @Override
-    public void update(ArrayList<String> browser, String urltype) {
 
-    }
 
-    @Override
+  /*  @Override
     public void update2(String s) {
         //  Log.e("update", "histryupdate");
         mRecyclerView.setVisibility(View.VISIBLE);
@@ -159,7 +160,7 @@ public class History_listview extends Fragment implements UICallback {
                 adapter.refresh(list);
             }
         }
-    }
+    }*/
 
     @Override
     public void onResume() {

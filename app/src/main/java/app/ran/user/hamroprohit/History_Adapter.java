@@ -39,26 +39,15 @@ package app.ran.user.hamroprohit;
         public static final int VIEW_TYPE_LIST = 1;
 
         public static class ViewHolder extends RecyclerView.ViewHolder {
-            // each data item is just a string in this case
-            //never define this outside viewholder
-            String Name;
-            String Email;
-            String Address;
-            String Phone;
-            String Date, processd;
+
             CardView c;
             TextView Name1;
-            TextView Email1;
-            TextView Address1;
-            TextView Phone1;
-            TextView Date1, tvproces;
             public View view;
 
             public ViewHolder(View v) {
                 super(v);
                 view = v;
-                c = (CardView) view.findViewById(R.id.card_view2);
-               
+              //  c = (CardView) view.findViewById(R.id.card_view2);
                 Name1 = (TextView) view.findViewById(R.id.name);
                
                 

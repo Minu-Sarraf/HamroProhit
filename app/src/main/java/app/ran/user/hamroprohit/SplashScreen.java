@@ -4,12 +4,8 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
@@ -17,6 +13,8 @@ import android.widget.TextView;
 import com.github.jorgecastillo.FillableLoader;
 import com.github.jorgecastillo.State;
 import com.github.jorgecastillo.listener.OnStateChangeListener;
+
+import app.ran.user.hamroprohit.Login.LoginActivity;
 
 public class SplashScreen extends AppCompatActivity implements OnStateChangeListener {
 

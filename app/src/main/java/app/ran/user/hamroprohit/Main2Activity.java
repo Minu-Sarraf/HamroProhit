@@ -34,15 +34,13 @@ public class Main2Activity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener, AppBarLayout.OnOffsetChangedListener {
     ProgressView progresView;
     private AppBarLayout appBarLayout;
-
     TextView tx;
-
     private ImageView imageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main2);
+        setContentView(R.layout.drawer);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         appBarLayout = (AppBarLayout) findViewById(R.id.app_bar_layout);
@@ -57,15 +55,8 @@ public class Main2Activity extends AppCompatActivity
         imageView = (ImageView) findViewById(R.id.view);
         tx = (TextView) findViewById(R.id.txview);
         imageView.setVisibility(View.GONE);
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(this);
-        tx.setVisibility(View.GONE);
         //getimage();
         //checkinternet();
-
-
-
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);

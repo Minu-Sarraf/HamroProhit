@@ -3,6 +3,14 @@
     <string name="action_settings">Settings</string>
     <string name="welcome">मेरो पुरोहित||</string>
     <string name="title_activity_login">"Login "</string>
+<string name="one">श्राद्ध</string>
+    <string name="one2">तुल्सी विवाह </string>
+    <string name="one3">रुद्री पूजा</string>
+    <string name="one4">बर्तमन</string>
+    <string name="one5">विवाह</string>
+    <string name="one6"> दुर्गा पूजा</string>
+    <string name="one7">लक्ष्म पूजा</string>
+    <string name="one8">म्ह पूजा </string>
 
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>

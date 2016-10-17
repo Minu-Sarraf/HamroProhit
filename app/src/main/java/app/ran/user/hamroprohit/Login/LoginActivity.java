@@ -34,6 +34,7 @@ public class LoginActivity extends LoginBaseActvity implements  BaseSliderView.O
         setContentView(R.layout.activity_login);
         mSlider = (SliderLayout)findViewById(R.id.slider);
         customIndicator = (PagerIndicator) findViewById(R.id.custom_indicator);
+        btnSignIn=(SignInButton)findViewById(R.id.btn_sign_in);
         for(int i=0; i<5;i++){
             DefaultSliderView defaultSliderView = new DefaultSliderView(this);
             defaultSliderView
@@ -43,7 +44,6 @@ public class LoginActivity extends LoginBaseActvity implements  BaseSliderView.O
 
             mSlider.addSlider(defaultSliderView);
             mSlider.setCustomIndicator(customIndicator);
-            btnSignIn.setVisibility(View.GONE);
             btnSignIn.setOnClickListener(this);
             //}
         }

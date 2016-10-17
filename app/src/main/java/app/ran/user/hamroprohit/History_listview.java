@@ -4,7 +4,6 @@ import android.content.CursorLoader;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
-import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -13,9 +12,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.support.v4.app.Fragment;
 
 import com.rey.material.widget.ProgressView;
-import com.squareup.okhttp.RequestBody;
 
 /**
  * Created by User on 10/16/2016.
@@ -34,15 +33,13 @@ public class History_listview extends Fragment implements UICallback {
     ProgressView progresView;
     SharedPreferences prefs;
     String name, phone;
-    RequestBody body;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         setHasOptionsMenu(true);
         // Log.e("fragment", "fragment");
         super.onCreate(savedInstanceState);
-
-
     }
 
    /* private RequestBody addpostdata() {
@@ -69,7 +66,6 @@ public class History_listview extends Fragment implements UICallback {
         mRecyclerView.setLayoutManager(mLayoutManager);
         adapter = new History_Adapter(AplicationActivity.getInstance(), null);
         mRecyclerView.setAdapter(adapter);
-
         return rootview;
     }
 

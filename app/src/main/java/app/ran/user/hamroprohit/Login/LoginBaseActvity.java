@@ -132,7 +132,7 @@ public class LoginBaseActvity extends AppCompatActivity implements View.OnClickL
             mIntentInProgress = false;
             if (!mGoogleApiClient.isConnecting()) {
                 mGoogleApiClient.connect();
-                showProgressDialog();
+                //showProgressDialog();
             }
         }
     }
@@ -297,7 +297,9 @@ public class LoginBaseActvity extends AppCompatActivity implements View.OnClickL
     }
 
     protected void hideProgressDialog() {
+
         if (dialog != null) {
+            Log.e("base","hide");
             dialog.dismiss();
         }
     }

@@ -1,6 +1,9 @@
 package app.ran.user.hamroprohit;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
@@ -8,44 +11,53 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
-import com.github.jorgecastillo.FillableLoader;
-import com.github.jorgecastillo.State;
-import com.github.jorgecastillo.listener.OnStateChangeListener;
+import com.rey.material.widget.ProgressView;
 
 import app.ran.user.hamroprohit.Login.LoginActivity;
 
-public class SplashScreen extends AppCompatActivity implements OnStateChangeListener {
+public class SplashScreen extends AppCompatActivity  {
 
     private static final long SPLASH_TIME_OUT = 3000;
     String generatedSvgPath;
-    FillableLoader fillableLoader;
 
+    ProgressView pg;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         TextView tv = (TextView) findViewById(R.id.text);
+        pg=(ProgressView)findViewById(R.id.splash);
         Typeface fontHindi = Typeface.createFromAsset(getAssets(),
                 "fonts/Ananda Lipi Bold Cn Bt.ttf");
-      //  fillableLoader = (FillableLoader) findViewById(R.id.fillableLoader);
+        //  fillableLoader = (FillableLoader) findViewById(R.id.fillableLoader);
         tv.setTypeface(fontHindi);
+        final SharedPreferences prefs = getSharedPreferences("userinfo", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        //editor.putBoolean("loggedin", true);
+        pg.setVisibility(View.VISIBLE);
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
 
-
-                Intent i = new Intent(SplashScreen.this, LoginActivity.class);
-                 startActivity(i);
-              //  finish();
-
+                pg.setVisibility(View.INVISIBLE);
+                if(prefs.getBoolean("loggedin",false)){
+                    Intent i = new Intent(SplashScreen.this,Main2Activity.class);
+                    startActivity(i);
+                    finish();
+                }else {
+                    Intent i = new Intent(SplashScreen.this, LoginActivity.class);
+                    startActivity(i);
+                    finish();
+                }
 
             }
         }, SPLASH_TIME_OUT);
 
-       // fillableLoader.setSvgPath(Path.path);
+        // fillableLoader.setSvgPath(Path.path);
     }
 
     private Boolean exit = false;
@@ -67,19 +79,7 @@ public class SplashScreen extends AppCompatActivity implements OnStateChangeList
 
     }
 
-    @Override
-    public void onStateChange(int state) {
-        //  ((SplashScreen)this).showStateHint(state);
-        switch (state) {
-            case State.FILL_STARTED:
-                Log.e("splash", "startted");
-                break;
-            case State.FINISHED:
-                Log.e("splash", "finished");
-                Intent i = new Intent(SplashScreen.this, LoginActivity.class);
-                startActivity(i);
-        }
-    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

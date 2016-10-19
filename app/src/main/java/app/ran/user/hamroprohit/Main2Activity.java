@@ -1,20 +1,23 @@
 package app.ran.user.hamroprohit;
-
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.AppCompatTextView;
+import android.text.SpannableString;
+import android.text.style.TextAppearanceSpan;
 import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -22,21 +25,19 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.plus.Plus;
 import com.rey.material.widget.ProgressView;
 import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
+import de.hdodenhof.circleimageview.CircleImageView;
 
-import app.ran.user.hamroprohit.History_listview;
-import app.ran.user.hamroprohit.R;
 
-public class Main2Activity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener, AppBarLayout.OnOffsetChangedListener {
-    ProgressView progresView;
+public class Main2Activity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener, AppBarLayout.OnOffsetChangedListener {
     private AppBarLayout appBarLayout;
     TextView tx;
     private ImageView imageView;
-
+    private ProgressView progresView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,28 +45,54 @@ public class Main2Activity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         appBarLayout = (AppBarLayout) findViewById(R.id.app_bar_layout);
-        appBarLayout.addOnOffsetChangedListener(this);
-        appBarLayout.setExpanded(false);
+      //  appBarLayout.addOnOffsetChangedListener(this);
+       // appBarLayout.setExpanded(false);
         CollapsingToolbarLayout collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
-        collapsingToolbarLayout.setTitle("Refer History");
+        collapsingToolbarLayout.setTitle("");
         collapsingToolbarLayout.setExpandedTitleColor(getResources().getColor(android.R.color.transparent));
-        getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);//attach snackbar to fragment
-        progresView = (ProgressView) findViewById(R.id.image_Load);
-        // progresView.setVisibility(View.VISIBLE);
+      //  getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);//attach snackbar to fragment
+
         imageView = (ImageView) findViewById(R.id.view);
         tx = (TextView) findViewById(R.id.txview);
         imageView.setVisibility(View.GONE);
-        //getimage();
-        //checkinternet();
+        updateuserinfo();
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
     }
+    private void updateuserinfo() {
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        Menu menu = navigationView.getMenu();
+        MenuItem tools= menu.findItem(R.id.tools);
+        SpannableString s = new SpannableString(tools.getTitle());
+        s.setSpan(new TextAppearanceSpan(this, R.style.color), 0, s.length(), 0);
+        tools.setTitle(s);
+        navigationView.setNavigationItemSelectedListener(this);
+        View navHeaderView = navigationView.inflateHeaderView(R.layout.nav_header_main2);
+        CircleImageView userImage = (CircleImageView) navHeaderView.findViewById(R.id.userimage);
+        AppCompatTextView userEmail = (AppCompatTextView) navHeaderView.findViewById(R.id.useremail);
+        AppCompatTextView userName = (AppCompatTextView) navHeaderView.findViewById(R.id.username);
+        ImageView coverImage = (ImageView) navHeaderView.findViewById(R.id.cover);
+        SharedPreferences prefs = getSharedPreferences("userinfo", Context.MODE_PRIVATE);
+
+        if (!prefs.getString("coverpic", "").equals("")) {
+            Picasso.with(this).load(prefs.getString("coverpic", "")).fit().into(coverImage);
+        } else {
+            Picasso.with(this).load(R.drawable.sidebar_cover).fit().into(coverImage);
+            Log.e("picaso","cover");
+        }
+
+        if (!prefs.getString("profilepic", "").equals("")) {
+            Picasso.with(this).load(prefs.getString("profilepic", "")).into(userImage);
+        }
+
+        userEmail.setText(prefs.getString("email", ""));
+        userName.setText(prefs.getString("name", ""));
+    }
+
    /* private void getimage() {
         Gson_parser.listener("refer_image", ApiUrl.url_image, null, this);
         Log.e("getimage", "getimage");
@@ -94,26 +121,6 @@ public class Main2Activity extends AppCompatActivity
         });
         th.start();
 
-    }
-*/
-
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        switch (requestCode) {
-            case (2):
-
-                if (resultCode == Activity.RESULT_OK) {
-                    Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.table1);
-                    if (fragment instanceof History_listview) {
-                        ((History_listview) fragment).getresult(1);
-                    }
-                } else {
-                    //  Log.e("referactivity", "refer not success");
-                }
-                break;
-        }
     }
 
 
@@ -202,9 +209,6 @@ public class Main2Activity extends AppCompatActivity
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement

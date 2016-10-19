@@ -1,5 +1,4 @@
 package app.ran.user.hamroprohit;
-
 import android.content.CursorLoader;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -13,7 +12,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.support.v4.app.Fragment;
-
 import com.rey.material.widget.ProgressView;
 
 /**
@@ -38,7 +36,7 @@ public class History_listview extends Fragment implements UICallback {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         setHasOptionsMenu(true);
-        // Log.e("fragment", "fragment");
+        Log.e("fragment", "fragment");
         super.onCreate(savedInstanceState);
     }
 
@@ -57,15 +55,13 @@ public class History_listview extends Fragment implements UICallback {
         View rootview = inflater.inflate(R.layout.linearlayout, container, false);
         mRecyclerView = (RecyclerView) rootview.findViewById(R.id.my_recycler_view);
         progresView = (ProgressView) rootview.findViewById(R.id.progress_wheel);
-        mSwipeRefreshLayout = (SwipeRefreshLayout) rootview.findViewById(R.id.swipe_refresh_layout);
+      //  mSwipeRefreshLayout = (SwipeRefreshLayout) rootview.findViewById(R.id.swipe_refresh_layout);
         mRecyclerView.setHasFixedSize(true);
-        // progresView.setVisibility(View.INVISIBLE);
-        progresView.setVisibility(View.VISIBLE);
-        mRecyclerView.setVisibility(View.GONE);
         mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
-        adapter = new History_Adapter(AplicationActivity.getInstance(), null);
+        adapter = new History_Adapter(getActivity(), null);
         mRecyclerView.setAdapter(adapter);
+        Log.e("histry","histry");
         return rootview;
     }
 
@@ -73,7 +69,7 @@ public class History_listview extends Fragment implements UICallback {
         if (mSwipeRefreshLayout != null) {
             mSwipeRefreshLayout.setColorSchemeResources(
                     R.color.materialred,
-                    R.color.com_facebook_blue,
+                    R.color.blue,
                     R.color.materialyellow);
         }
 
@@ -92,7 +88,7 @@ public class History_listview extends Fragment implements UICallback {
         super.onActivityCreated(savedInstanceState);
      //   Gson_parser.listener("history", ApiUrl.referl_history, addpostdata(), this);
 
-        trySwipeRefreshLayout();
+        //trySwipeRefreshLayout();
     }
 
     public void getresult(int result) {

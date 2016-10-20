@@ -53,10 +53,8 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
       //  getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);//attach snackbar to fragment
 
         imageView = (ImageView) findViewById(R.id.view);
-        tx = (TextView) findViewById(R.id.txview);
-        imageView.setVisibility(View.GONE);
-        updateuserinfo();
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        updateuserinfo();
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
@@ -65,11 +63,11 @@ public class Main2Activity extends AppCompatActivity implements NavigationView.O
     }
     private void updateuserinfo() {
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        Menu menu = navigationView.getMenu();
+        /*Menu menu = navigationView.getMenu();
         MenuItem tools= menu.findItem(R.id.tools);
         SpannableString s = new SpannableString(tools.getTitle());
         s.setSpan(new TextAppearanceSpan(this, R.style.color), 0, s.length(), 0);
-        tools.setTitle(s);
+        tools.setTitle(s);*/
         navigationView.setNavigationItemSelectedListener(this);
         View navHeaderView = navigationView.inflateHeaderView(R.layout.nav_header_main2);
         CircleImageView userImage = (CircleImageView) navHeaderView.findViewById(R.id.userimage);

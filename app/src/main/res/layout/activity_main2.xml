@@ -27,7 +27,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:contentDescription="Please Refer Your Friend..."
-            app:contentScrim="@color/colorPrimary"
+            app:contentScrim="@color/colorPrimaryorange"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
             app:expandedTitleMarginEnd="84dp"
             app:expandedTitleMarginStart="65dp">
